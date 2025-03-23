@@ -1,0 +1,17 @@
+mkdire LIN1
+cd LIN1
+touch master.py
+python -m venv myvenv1
+source myvenv/bin/activate
+sudo raspi-config   >>> interface option >>> serial port >>> desable login enable seial hardware
+sudo apt update
+sudo apt install python3-serial
+pip install pyserial
+pip install RPI.GPIO
+sudo usermod -a -G dialout rasp3
+ls /dev/serial*
+sudo nano /boot/firmware/config.txt  >>> enable_uart=1
+dtoverlay=disable-bt
+dtoverlay=pi3-miniuart-bt
+ls -l /dev/serial0
+

@@ -1,0 +1,32 @@
+import serial
+import time
+import RPi.GPIO as GPIO
+
+# GPIO setup
+SLP_PIN = 18
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(SLP_PIN, GPIO.OUT)
+GPIO.output(SLP_PIN, GPIO.HIGH)  # Wake up LIN module
+
+# Serial setup
+linSerial = serial.Serial("/dev/serial0", baudrate=9600, timeout=1)
+
+def send_message(message):
+    linSerial.write((message + "\n").encode('utf-8'))
+    print(f"Sent: {message}")
+    time.sleep(1)
+
+try:
+    print("Master Ready")
+
+    while True:
+        send_message("hello arduino1")
+        time.sleep(2)
+        send_message("hello arduino2")
+        time.sleep(2)
+
+except KeyboardInterrupt:
+    print("Stopping...")
+finally:
+    linSerial.close()
+    GPIO.cleanup()

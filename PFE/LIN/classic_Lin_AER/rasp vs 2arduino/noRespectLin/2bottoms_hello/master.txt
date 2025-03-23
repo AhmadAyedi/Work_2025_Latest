@@ -1,0 +1,16 @@
+import serial
+
+# Initialize LIN communication
+linSerial = serial.Serial('/dev/serial0', baudrate=9600, timeout=1)
+
+print("Master Ready")
+
+try:
+    while True:
+        if linSerial.in_waiting > 0:
+            message = linSerial.readline().decode('utf-8').strip()
+            print(f"Received: {message}")  # Print the received message from slaves
+
+except KeyboardInterrupt:
+    print("\nExiting program")
+    linSerial.close()

@@ -1,0 +1,28 @@
+{
+  "name": "Lin-Interface",
+  "version": "1.0.0",
+  "description": "LIN-Bus Implementation (using UART) for Frames, Transportation and Node Configuration ",
+  "keywords": [
+    "LIN",
+    "Lin-Bus",
+    "Lin-Node"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mestrode/Lin-Interface-Library.git"
+  },
+  "authors": [
+    {
+      "name": "mestrode",
+      "maintainer": true
+    }
+  ],
+  "license": "GPL-2.0-only",
+  "frameworks": "arduino",
+  "platforms": ["espressif32"],
+  "export": {
+    "exclude": ["test", "docs", "example"]
+  },
+  "dependencies": {
+  }
+}

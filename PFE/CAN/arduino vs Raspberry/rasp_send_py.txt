@@ -1,0 +1,23 @@
+import can
+import time
+
+# Create a CAN bus interface
+bus = can.interface.Bus(channel='can0', interface='socketcan')
+
+# Convert "123456789" to byte array (max 8 bytes for standard CAN frame)
+data = b'12345678'  # Only first 8 bytes are allowed
+
+# Define the message
+msg = can.Message(arbitration_id=0x100, data=data, is_extended_id=False)
+
+print("Sending CAN message...")
+
+try:
+    while True:
+        bus.send(msg)  # Send the message
+        print(f"Message Sent: ID={hex(msg.arbitration_id)} Data={msg.data.hex()}")
+        time.sleep(1)  # Send message every second
+except KeyboardInterrupt:
+    print("\nStopped sending.")
+finally:
+    bus.shutdown()  # Ensure the CAN bus is properly shut down

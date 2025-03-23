@@ -1,0 +1,7 @@
+sudo apt-get install python3-serial
+sudo nano /boot/firmware/config.txt
+
+enable_uart=1
+sudo apt-get install python3-rpi.gpio
+pip install pyserial
+pip install RPi.GPIO

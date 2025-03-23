@@ -1,0 +1,18 @@
+import serial
+
+# Serial setup
+linSerial = serial.Serial("/dev/serial0", baudrate=9600, timeout=1)
+
+SLAVE_ID = "1"  # ID assigned to this Raspberry Pi
+print("Raspberry Pi 1 (LIN Slave) Ready")
+
+try:
+    while True:
+        if linSerial.in_waiting:
+            received_data = linSerial.readline().decode('utf-8').strip()
+            if received_data == f"{SLAVE_ID}:hello":
+                print("Received from LIN Master:", received_data)
+except KeyboardInterrupt:
+    print("Stopping...")
+finally:
+    linSerial.close()

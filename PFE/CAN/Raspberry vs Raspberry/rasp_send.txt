@@ -1,0 +1,20 @@
+import can
+import time
+
+def send_can_data():
+    try:
+        bus = can.interface.Bus(channel='can0', interface='socketcan')
+
+        data = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07]  # Same data as Arduino
+        message = can.Message(arbitration_id=0x100, data=data, is_extended_id=False)
+
+        while True:
+            bus.send(message)
+            print("Message Sent:", message)
+            time.sleep(1)  # Send every 1 second
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    send_can_data()

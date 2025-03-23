@@ -1,0 +1,165 @@
+{
+  "lin_1": {
+    "phy": {
+      "mode": 1,
+      "bit_rate": 19200
+    },
+    "frames": [
+      {
+        "name": "SG_BatteryConfig",
+        "id": "11",
+        "length": 6,
+        "checksum_type": 0
+      },
+      {
+        "name": "IBS_DataAcq",
+        "id": "21",
+        "length": 8,
+        "checksum_type": 0
+      },
+      {
+        "name": "IBS_SOC",
+        "id": "22",
+        "length": 6,
+        "checksum_type": 0
+      },
+      {
+        "name": "IBS_SOF",
+        "id": "23",
+        "length": 8,
+        "checksum_type": 0
+      },
+      {
+        "name": "IBS_SOH",
+        "id": "24",
+        "length": 6,
+        "checksum_type": 0
+      },
+      {
+        "name": "IBS_BatteryRes",
+        "id": "25",
+        "length": 8,
+        "checksum_type": 0
+      },
+      {
+        "name": "IBS_DrivingCycle",
+        "id": "26",
+        "length": 8,
+        "checksum_type": 0
+      },
+      {
+        "name": "IBS_BatteryHis",
+        "id": "27",
+        "length": 7,
+        "checksum_type": 0
+      },
+      {
+        "name": "IBS_Status",
+        "id": "28",
+        "length": 8,
+        "checksum_type": 0
+      }
+    ],
+    "transmit": [
+      {
+        "name": "IBS_DataAcq",
+        "state": 1,
+        "id": "21",
+        "period": 700,
+        "delay": 0
+      },
+      {
+        "name": "IBS_SOC",
+        "state": 1,
+        "id": "22",
+        "period": 700,
+        "delay": 50
+      },
+      {
+        "name": "IBS_DataAcq",
+        "state": 1,
+        "id": "21",
+        "period": 700,
+        "delay": 100
+      },
+      {
+        "name": "IBS_SOF",
+        "state": 1,
+        "id": "23",
+        "period": 700,
+        "delay": 150
+      },
+      {
+        "name": "IBS_DataAcq",
+        "state": 1,
+        "id": "21",
+        "period": 700,
+        "delay": 200
+      },
+      {
+        "name": "IBS_SOH",
+        "state": 1,
+        "id": "24",
+        "period": 700,
+        "delay": 250
+      },
+      {
+        "name": "IBS_DataAcq",
+        "state": 1,
+        "id": "21",
+        "period": 700,
+        "delay": 300
+      },
+      {
+        "name": "IBS_BatteryRes",
+        "state": 1,
+        "id": "25",
+        "period": 700,
+        "delay": 350
+      },
+      {
+        "name": "IBS_DataAcq",
+        "state": 1,
+        "id": "21",
+        "period": 700,
+        "delay": 400
+      },
+      {
+        "name": "IBS_DrivingCycle",
+        "state": 1,
+        "id": "26",
+        "period": 700,
+        "delay": 450
+      },
+      {
+        "name": "IBS_DataAcq",
+        "state": 1,
+        "id": "21",
+        "period": 700,
+        "delay": 500
+      },
+      {
+        "name": "IBS_BatteryHis",
+        "state": 1,
+        "id": "27",
+        "period": 700,
+        "delay": 550
+      },
+      {
+        "name": "IBS_Status",
+        "state": 1,
+        "id": "28",
+        "period": 700,
+        "delay": 600
+      },
+      {
+        "name": "SG_BatteryConfig",
+        "state": 1,
+        "id": "11",
+        "data": "020794D84108",
+        "period": 700,
+        "delay": 650
+      }
+    ]
+  }
+}

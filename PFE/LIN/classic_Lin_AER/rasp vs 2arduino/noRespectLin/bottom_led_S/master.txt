@@ -1,0 +1,22 @@
+import serial
+import time
+
+# Initialize LIN communication
+linSerial = serial.Serial('/dev/serial0', baudrate=9600, timeout=1)
+
+print("Master Ready")
+
+try:
+    while True:
+        if linSerial.in_waiting > 0:
+            message = linSerial.readline().decode('utf-8').strip()
+            print(f"Received from Slave 1: {message}")
+
+            # Route the message to Slave 2
+            if message == "button_pressed":
+                linSerial.write("toggle_led\n".encode('utf-8'))
+                print(f"Sent to Slave 2: toggle_led")
+
+except KeyboardInterrupt:
+    print("\nExiting program")
+    linSerial.close()

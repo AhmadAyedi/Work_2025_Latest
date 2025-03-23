@@ -1,0 +1,73 @@
+WITH COMMANDS
+
+sudo raspi-config
+Interfacing Options → SPI → Enable it
+
+sudo reboot
+
+
+sudo apt update
+sudo apt install can-utils
+
+
+sudo modprobe mcp251x
+sudo modprobe can_dev
+
+
+sudo nano /boot/config.txt
+dtparam=spi=on
+dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
+
+sudo reboot
+
+
+sudo ip link set can0 up type can bitrate 500000
+sudo ifconfig can0 up
+
+
+candump can0
+
+WITH PYTHON SCRIPTS
+
+
+mkdir ~/can_project
+cd ~/can_project
+
+
+python3 -m venv venv
+source venv/bin/activate
+
+pip install python-can
+pip list
+
+nano receive.py
+import can
+
+def receive_can_data():
+    try:
+        # Open the CAN interface
+        bus = can.interface.Bus(channel='can0', interface='socketcan')
+
+        print("Listening for CAN messages...")
+
+        while True:
+            message = bus.recv()  # Wait for a message
+            
+            if message is not None:
+                print(f"Received CAN Message:")
+                print(f"  ID        : {hex(message.arbitration_id)}")
+                print(f"  DLC       : {message.dlc} bytes")
+                print(f"  Data      : {list(message.data)}")  # Convert bytes to a list for better readability
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    receive_can_data()
+
+
+Save the file (CTRL + X, then Y, then Enter).
+
+source ~/can_project/venv/bin/activate
+python receive.py
+

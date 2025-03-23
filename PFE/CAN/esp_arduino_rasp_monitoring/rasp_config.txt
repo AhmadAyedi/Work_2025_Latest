@@ -1,0 +1,17 @@
+sudo ip link set can0 down
+sudo ip link set can0 up type can bitrate 500000
+source can_env1/bin/activate
+cd can_proj1
+sudo nano /boot/firmware/config.txt
+pip install python-can  
+sudo nano /etc/network/interfaces
+sudo apt install can-utils python3-pip python3-venv
+sudo apt update
+pip install python-can spidev
+
+ ifconfig can0
+
+sudo apt install can-utils python3-pip python3-venv
+dmesg | grep -i mcp
+sudo raspi-config
+
