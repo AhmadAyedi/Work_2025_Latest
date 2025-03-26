@@ -1,0 +1,10 @@
+13:02:20 **** Build of configuration Debug for project BothTransmitReceive ****
+make -j4 all 
+arm-none-eabi-size   BothTransmitReceive.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20760	    120	   2104	  22984	   59c8	BothTransmitReceive.elf
+Finished building: default.size.stdout
+ 
+
+13:02:20 Build Finished. 0 errors, 0 warnings. (took 499ms)
+

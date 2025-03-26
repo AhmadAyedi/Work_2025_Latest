@@ -1,0 +1,10 @@
+13:00:02 **** Build of configuration Debug for project ReceiveFromHercules ****
+make -j4 all 
+arm-none-eabi-size   ReceiveFromHercules.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15936	     20	   1772	  17728	   4540	ReceiveFromHercules.elf
+Finished building: default.size.stdout
+ 
+
+13:00:03 Build Finished. 0 errors, 0 warnings. (took 677ms)
+

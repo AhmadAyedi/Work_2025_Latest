@@ -36,6 +36,7 @@ public:
     void work() const override
     {
         writeCode();
+        debugCode();
     }
 };
 
@@ -74,6 +75,7 @@ public:
     void work() const override
     {
         manageTeam();
+        setGoals();
     }
 };
 
@@ -100,6 +102,7 @@ public:
     void work() const override
     {
         createDesigns();
+        presentDesigns();
     }
 };
 
@@ -126,6 +129,7 @@ public:
     void work() const override
     {
         runTests();
+        reportBugs();
     }
 };
 
@@ -152,7 +156,8 @@ public:
     void work() const override
     {
         planArchitecture();
-    }
+        reviewDesigns();
+        }
 };
 
 int main()

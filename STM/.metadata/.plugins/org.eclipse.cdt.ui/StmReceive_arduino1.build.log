@@ -1,0 +1,10 @@
+11:06:36 **** Incremental Build of configuration Debug for project StmReceive_arduino1 ****
+make -j4 all 
+arm-none-eabi-size   StmReceive_arduino1.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19072	    112	   2040	  21224	   52e8	StmReceive_arduino1.elf
+Finished building: default.size.stdout
+ 
+
+11:06:36 Build Finished. 0 errors, 0 warnings. (took 412ms)
+

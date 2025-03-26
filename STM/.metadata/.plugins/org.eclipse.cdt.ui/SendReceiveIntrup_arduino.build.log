@@ -1,0 +1,10 @@
+13:39:06 **** Incremental Build of configuration Debug for project SendReceiveIntrup_arduino ****
+make -j4 all 
+arm-none-eabi-size   SendReceiveIntrup_arduino.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21140	    128	   2096	  23364	   5b44	SendReceiveIntrup_arduino.elf
+Finished building: default.size.stdout
+ 
+
+13:39:06 Build Finished. 0 errors, 0 warnings. (took 397ms)
+

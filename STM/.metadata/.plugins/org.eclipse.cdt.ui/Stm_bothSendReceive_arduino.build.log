@@ -1,0 +1,10 @@
+12:13:37 **** Build of configuration Debug for project Stm_bothSendReceive_arduino ****
+make -j4 all 
+arm-none-eabi-size   Stm_bothSendReceive_arduino.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19700	    112	   2040	  21852	   555c	Stm_bothSendReceive_arduino.elf
+Finished building: default.size.stdout
+ 
+
+12:13:38 Build Finished. 0 errors, 0 warnings. (took 1s.658ms)
+

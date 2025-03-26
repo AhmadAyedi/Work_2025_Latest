@@ -1,0 +1,10 @@
+13:04:06 **** Incremental Build of configuration Debug for project send_uart to hercules ****
+make -j4 all 
+arm-none-eabi-size   send_uart\ to\ hercules.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15456	    100	   2076	  17632	   44e0	send_uart to hercules.elf
+Finished building: default.size.stdout
+ 
+
+13:04:06 Build Finished. 0 errors, 0 warnings. (took 345ms)
+

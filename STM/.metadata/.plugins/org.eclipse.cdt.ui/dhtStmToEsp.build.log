@@ -1,0 +1,10 @@
+14:35:17 **** Incremental Build of configuration Debug for project dhtStmToEsp ****
+make -j4 all 
+arm-none-eabi-size   dhtStmToEsp.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19828	    112	   2128	  22068	   5634	dhtStmToEsp.elf
+Finished building: default.size.stdout
+ 
+
+14:35:18 Build Finished. 0 errors, 0 warnings. (took 946ms)
+

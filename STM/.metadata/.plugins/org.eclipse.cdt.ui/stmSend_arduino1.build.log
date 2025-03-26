@@ -1,0 +1,10 @@
+12:41:38 **** Incremental Build of configuration Debug for project stmSend_arduino1 ****
+make -j4 all 
+arm-none-eabi-size   stmSend_arduino1.elf 
+   text	   data	    bss	    dec	    hex	filename
+  17108	    112	   2040	  19260	   4b3c	stmSend_arduino1.elf
+Finished building: default.size.stdout
+ 
+
+12:41:40 Build Finished. 0 errors, 0 warnings. (took 1s.312ms)
+
