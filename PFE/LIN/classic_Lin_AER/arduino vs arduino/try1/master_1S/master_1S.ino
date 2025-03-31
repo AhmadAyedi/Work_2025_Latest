@@ -17,7 +17,7 @@ void setup() {
 }
 
 void loop() {
-    String frame = "heyLogicAnalyzerIamHere"; // Data to send
+    String frame = "hello"; // Data to send
     linSerial.println(frame);   // Send over LIN
     Serial.println("Sent: " + frame); // Debugging output
 
