@@ -1,10 +1,10 @@
-16:55:30 **** Build of configuration Debug for project Lin_send1 ****
+01:09:16 **** Incremental Build of configuration Debug for project Lin_send1 ****
 make -j4 all 
 arm-none-eabi-size   Lin_send1.elf 
    text	   data	    bss	    dec	    hex	filename
-  19480	    112	   2040	  21632	   5480	Lin_send1.elf
+  19828	    112	   2064	  22004	   55f4	Lin_send1.elf
 Finished building: default.size.stdout
  
 
-16:55:34 Build Finished. 0 errors, 0 warnings. (took 3s.947ms)
+01:09:16 Build Finished. 0 errors, 0 warnings. (took 487ms)
 

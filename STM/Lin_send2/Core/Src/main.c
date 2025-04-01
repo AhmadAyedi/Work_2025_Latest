@@ -18,7 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "stm32l4xx_hal.h"  // Added for DBGMCU definitions
+#include <stdio.h>  // Added for SWV printf
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -31,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define ITM_Port32(n) (*((volatile unsigned long *)(0xE0000000 + 4*n)))
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -51,7 +52,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
-
+int _write(int file, char *ptr, int len);  // For SWV output redirection
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -90,6 +91,16 @@ uint8_t checksum_Calc (uint8_t PID, uint8_t *data, int size)
 	sum = 0xFF-sum;
 	return sum;
 }
+// SWV printf redirection
+int _write(int file, char *ptr, int len)
+{
+    int i;
+    for (i = 0; i < len; i++)
+    {
+        ITM_SendChar(*ptr++);
+    }
+    return len;
+}
 /* USER CODE END 0 */
 
 /**
@@ -122,7 +133,13 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  // Enable SWV
+    DBGMCU->CR |= DBGMCU_CR_TRACE_IOEN;  // Correct macro for trace enable
+    ITM->LAR = 0xC5ACCE55;              // Unlock ITM
+    ITM->TER |= (1 << 0);               // Enable stimulus port 0
+    ITM->TCR |= ITM_TCR_ITMENA_Msk;     // Enable ITM with proper mask
 
+    printf("LIN Master Starting...\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -132,16 +149,25 @@ int main(void)
     /* USER CODE END WHILE */
 
 	  TxData[0] = 0x55;  // sync field
-	  TxData[1] = pid_Calc(0x34);
-	  for (int i=0; i<8; i++)
-	  {
-		  TxData[i+2] = i;
-	  }
-	  TxData[10] = checksum_Calc(TxData[1], TxData+2, 8);   //lin 2.1 includes PID, for line v1 use PID =0
+	      TxData[1] = pid_Calc(0x34);
+	      for (int i=0; i<8; i++)
+	      {
+	          TxData[i+2] = i;
+	      }
+	      TxData[10] = checksum_Calc(TxData[1], TxData+2, 8);
 
-	  HAL_LIN_SendBreak(&huart1);
-	  HAL_UART_Transmit(&huart1, TxData, 11, 1000);
-	  HAL_Delay(1000);
+	      printf("Sending LIN Frame:\n");
+	      printf("Sync: 0x%02X\n", TxData[0]);
+	      printf("PID: 0x%02X\n", TxData[1]);
+	      printf("Data: ");
+	      for(int i = 0; i < 8; i++) {
+	          printf("0x%02X ", TxData[i+2]);
+	      }
+	      printf("\nChecksum: 0x%02X\n", TxData[10]);
+
+	      HAL_LIN_SendBreak(&huart1);
+	      HAL_UART_Transmit(&huart1, TxData, 11, 1000);
+	      HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

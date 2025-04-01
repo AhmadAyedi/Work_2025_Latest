@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "stm32l4xx_hal.h"  // Added for DBGMCU definitions
 #include <stdio.h>
 #include <string.h>
 /* Private includes ----------------------------------------------------------*/
@@ -44,7 +45,7 @@
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-
+uint8_t lin_frame[20];  // Buffer to hold the complete LIN frame
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -69,6 +70,57 @@ uint8_t Compute_Checksum(uint8_t *data, uint8_t len, uint8_t pid); // Added prot
 PUTCHAR_PROTOTYPE {
     ITM_SendChar(ch);
     return ch;
+}
+
+/* Compute Parity for PID */
+uint8_t Compute_Parity(uint8_t id) {
+    if (id > 0x3F) {  // ID must be 6 bits (0 to 63)
+        Error_Handler();
+    }
+    uint8_t p0 = (id & 0x01) ^ ((id >> 1) & 0x01) ^ ((id >> 2) & 0x01) ^ ((id >> 4) & 0x01);
+    uint8_t p1 = ~(((id >> 1) & 0x01) ^ ((id >> 3) & 0x01) ^ ((id >> 4) & 0x01) ^ ((id >> 5) & 0x01)) & 0x01;
+    return (p0 & 0x01) | ((p1 & 0x01) << 1);
+}
+
+/* Compute Checksum (Enhanced: includes PID) */
+uint8_t Compute_Checksum(uint8_t *data, uint8_t len, uint8_t pid) {
+    uint16_t sum = pid;
+    for (uint8_t i = 0; i < len; i++) {
+        sum += data[i];
+        if (sum >= 256) sum -= 255;
+    }
+    return (uint8_t)(~sum);
+}
+
+/* Send LIN Frame */
+void Send_LIN_Frame(void) {
+    uint8_t sync_field = 0x55;  // Sync
+    uint8_t id = 0x01;          // Example ID (1)
+    uint8_t pid = id | (Compute_Parity(id) << 6); // PID with parity
+    uint8_t data[] = {0x48, 0x65, 0x6C, 0x6C, 0x6F}; // "Hello" in ASCII
+    uint8_t data_len = sizeof(data);
+    uint8_t checksum = Compute_Checksum(data, data_len, pid);
+
+    // Prepare the LIN frame (excluding break, which is sent separately)
+    lin_frame[0] = sync_field;  // Sync field
+    lin_frame[1] = pid;         // PID
+    for (uint8_t i = 0; i < data_len; i++) {
+        lin_frame[i + 2] = data[i];  // Data bytes
+    }
+    lin_frame[data_len + 2] = checksum;  // Checksum
+
+    // Send Break
+    HAL_LIN_SendBreak(&huart1);
+
+    // Send the rest of the frame in one go
+    HAL_UART_Transmit(&huart1, lin_frame, data_len + 3, HAL_MAX_DELAY);
+
+    // Display on SWV
+    printf("Sent LIN Frame - Sync: 0x%02X, PID: 0x%02X, Data: ", sync_field, pid);
+    for (uint8_t i = 0; i < data_len; i++) {
+        printf("0x%02X ", data[i]);
+    }
+    printf(", Checksum: 0x%02X\n", checksum);
 }
 /* USER CODE END 0 */
 
@@ -102,7 +154,13 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  // Enable SWV
+    DBGMCU->CR |= DBGMCU_CR_TRACE_IOEN;  // Enable trace
+    ITM->LAR = 0xC5ACCE55;              // Unlock ITM
+    ITM->TER |= (1 << 0);               // Enable stimulus port 0
+    ITM->TCR |= ITM_TCR_ITMENA_Msk;     // Enable ITM
 
+    printf("LIN Master Starting...\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -117,51 +175,7 @@ int main(void)
   /* USER CODE END 3 */
 }
 /* Send LIN Frame */
-void Send_LIN_Frame(void) {
-    uint8_t break_field = 0x00; // Break (low pulse)
-    uint8_t sync_field = 0x55;  // Sync
-    uint8_t id = 0x01;          // Example ID (1)
-    uint8_t pid = id | (Compute_Parity(id) << 6); // PID with parity
-    uint8_t data[] = {0x48, 0x65, 0x6C, 0x6C, 0x6F}; // "Hello" in ASCII
-    uint8_t checksum = Compute_Checksum(data, sizeof(data), pid);
 
-    // Send Break (emulate 13-bit low by sending 0x00 with break detection)
-    HAL_LIN_SendBreak(&huart1);
-    HAL_UART_Transmit(&huart1, &break_field, 1, HAL_MAX_DELAY);
-
-    // Send Sync
-    HAL_UART_Transmit(&huart1, &sync_field, 1, HAL_MAX_DELAY);
-
-    // Send PID
-    HAL_UART_Transmit(&huart1, &pid, 1, HAL_MAX_DELAY);
-
-    // Send Data
-    HAL_UART_Transmit(&huart1, data, sizeof(data), HAL_MAX_DELAY);
-
-    // Send Checksum
-    HAL_UART_Transmit(&huart1, &checksum, 1, HAL_MAX_DELAY);
-
-    // Display on SWV
-    printf("Sent LIN Frame - Break: 0x00, Sync: 0x%02X, PID: 0x%02X, Data: Hello, Checksum: 0x%02X\n",
-           sync_field, pid, checksum);
-}
-
-/* Compute Parity for PID */
-uint8_t Compute_Parity(uint8_t id) {
-    uint8_t p0 = (id & 0x01) ^ ((id >> 1) & 0x01) ^ ((id >> 2) & 0x01) ^ ((id >> 4) & 0x01);
-    uint8_t p1 = ~((id >> 1) & 0x01) ^ ((id >> 3) & 0x01) ^ ((id >> 4) & 0x01) ^ ((id >> 5) & 0x01);
-    return (p0 & 0x01) | ((p1 & 0x01) << 1);
-}
-
-/* Compute Checksum (Enhanced: includes PID) */
-uint8_t Compute_Checksum(uint8_t *data, uint8_t len, uint8_t pid) {
-    uint16_t sum = pid;
-    for (uint8_t i = 0; i < len; i++) {
-        sum += data[i];
-        if (sum >= 256) sum -= 255;
-    }
-    return (uint8_t)(~sum);
-}
 /**
   * @brief System Clock Configuration
   * @retval None
