@@ -1,0 +1,29 @@
+/*
+ * linlib.hpp
+ *
+ *  Created on: Apr 4, 2025
+ *      Author: Mediatek
+ */
+
+#ifndef INC_LINLIB_HPP_
+#define INC_LINLIB_HPP_
+
+#include "stm32l4xx_hal.h"
+#include <stdint.h>
+
+class LinMaster {
+private:
+    UART_HandleTypeDef *huart;
+    uint8_t lin_frame[20];
+    uint8_t default_id;
+
+    uint8_t computeParity(uint8_t id);
+    uint8_t computeChecksum(uint8_t *data, uint8_t len, uint8_t pid);
+    void handleError();  // New error handling method
+
+public:
+    LinMaster(UART_HandleTypeDef *huart, uint8_t id = 0x01);
+    void sendFrame();
+};
+
+#endif /* INC_LINLIB_HPP_ */

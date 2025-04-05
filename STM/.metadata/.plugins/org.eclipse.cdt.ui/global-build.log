@@ -1,21 +1,36 @@
-01:09:05 **** Incremental Build of configuration Debug for project Lin_send1 ****
+17:42:36 **** Build of configuration Debug for project LinSendfakeLib2 ****
 make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "Lin_send1.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\Lin_send1\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lin_send1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Lin_send1.elf
+arm-none-eabi-g++ "../Core/Src/LinMaster.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/LinMaster.d" -MT"Core/Src/LinMaster.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/LinMaster.o"
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "LinSendfakeLib2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\LinSendfakeLib2\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LinSendfakeLib2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: LinSendfakeLib2.elf
  
-arm-none-eabi-size   Lin_send1.elf 
-arm-none-eabi-objdump -h -S  Lin_send1.elf  > "Lin_send1.list"
+arm-none-eabi-size   LinSendfakeLib2.elf 
+arm-none-eabi-objdump -h -S  LinSendfakeLib2.elf  > "LinSendfakeLib2.list"
    text	   data	    bss	    dec	    hex	filename
-  19828	    112	   2064	  22004	   55f4	Lin_send1.elf
+  23932	    112	   2048	  26092	   65ec	LinSendfakeLib2.elf
 Finished building: default.size.stdout
  
-Finished building: Lin_send1.list
+Finished building: LinSendfakeLib2.list
  
-01:09:16 **** Incremental Build of configuration Debug for project Lin_send1 ****
+17:43:03 **** Incremental Build of configuration Debug for project LinSendfakeLib2 ****
 make -j4 all 
-arm-none-eabi-size   Lin_send1.elf 
+arm-none-eabi-size   LinSendfakeLib2.elf 
    text	   data	    bss	    dec	    hex	filename
-  19828	    112	   2064	  22004	   55f4	Lin_send1.elf
+  23932	    112	   2048	  26092	   65ec	LinSendfakeLib2.elf
+Finished building: default.size.stdout
+ 
+17:51:36 **** Incremental Build of configuration Debug for project LinSendfakeLib2 ****
+make -j4 all 
+arm-none-eabi-size   LinSendfakeLib2.elf 
+   text	   data	    bss	    dec	    hex	filename
+  23932	    112	   2048	  26092	   65ec	LinSendfakeLib2.elf
+Finished building: default.size.stdout
+ 
+17:53:01 **** Incremental Build of configuration Debug for project LinSendfakeLib2 ****
+make -j4 all 
+arm-none-eabi-size   LinSendfakeLib2.elf 
+   text	   data	    bss	    dec	    hex	filename
+  23932	    112	   2048	  26092	   65ec	LinSendfakeLib2.elf
 Finished building: default.size.stdout
  

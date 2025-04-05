@@ -107,7 +107,7 @@ void Send_LIN_Frame(void) {
     for (uint8_t i = 0; i < data_len; i++) {
         lin_frame[i + 2] = data[i];  // Data bytes
     }
-    lin_frame[data_len + 2] = checksum;  // Checksum
+  lin_frame[data_len + 2] = checksum;  // Checksum
 
     // Send Break
     HAL_LIN_SendBreak(&huart1);

@@ -695,7 +695,7 @@ void Send_LIN_Frame(void) {
  8000736:	429a      	cmp	r2, r3
  8000738:	d3ef      	bcc.n	800071a <Send_LIN_Frame+0x5a>
     }
-    lin_frame[data_len + 2] = checksum;  // Checksum
+  lin_frame[data_len + 2] = checksum;  // Checksum
  800073a:	7abb      	ldrb	r3, [r7, #10]
  800073c:	3302      	adds	r3, #2
  800073e:	491a      	ldr	r1, [pc, #104]	; (80007a8 <Send_LIN_Frame+0xe8>)

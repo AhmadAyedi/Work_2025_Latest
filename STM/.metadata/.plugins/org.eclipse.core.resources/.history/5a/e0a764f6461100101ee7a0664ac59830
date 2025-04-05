@@ -1,0 +1,67 @@
+/*
+ * linlib.cpp
+ *
+ *  Created on: Apr 4, 2025
+ *      Author: Mediatek
+ */
+
+
+#include "linlib.hpp"
+#include "stdio.h"  // For printf
+
+// Constructor
+LinMaster::LinMaster(UART_HandleTypeDef *huart, uint8_t id) {
+    this->huart = huart;    // Store the UART handle
+    this->default_id = id;  // Store the default ID
+}
+
+// Compute Parity for PID
+uint8_t LinMaster::computeParity(uint8_t id) {
+    if (id > 0x3F) {  // ID must be 6 bits (0 to 63)
+        Error_Handler();  // Note: Still depends on main.cpp's Error_Handler
+    }
+    uint8_t p0 = (id & 0x01) ^ ((id >> 1) & 0x01) ^ ((id >> 2) & 0x01) ^ ((id >> 4) & 0x01);
+    uint8_t p1 = ~(((id >> 1) & 0x01) ^ ((id >> 3) & 0x01) ^ ((id >> 4) & 0x01) ^ ((id >> 5) & 0x01)) & 0x01;
+    return (p0 & 0x01) | ((p1 & 0x01) << 1);
+}
+
+// Compute Checksum (Enhanced: includes PID)
+uint8_t LinMaster::computeChecksum(uint8_t *data, uint8_t len, uint8_t pid) {
+    uint16_t sum = pid;
+    for (uint8_t i = 0; i < len; i++) {
+        sum += data[i];
+        if (sum >= 256) sum -= 255;
+    }
+    return (uint8_t)(~sum);
+}
+
+// Send LIN Frame
+void LinMaster::sendFrame() {
+    uint8_t sync_field = 0x55;  // Sync
+    uint8_t id = default_id;    // Use the object's default ID
+    uint8_t pid = id | (computeParity(id) << 6); // PID with parity
+    uint8_t data[] = {0x48, 0x65, 0x6C, 0x6C, 0x6F}; // "Hello" in ASCII
+    uint8_t data_len = sizeof(data);
+    uint8_t checksum = computeChecksum(data, data_len, pid);
+
+    // Prepare the LIN frame
+    lin_frame[0] = sync_field;  // Sync field
+    lin_frame[1] = pid;         // PID
+    for (uint8_t i = 0; i < data_len; i++) {
+        lin_frame[i + 2] = data[i];  // Data bytes
+    }
+    lin_frame[data_len + 2] = checksum;  // Checksum
+
+    // Send Break
+    HAL_LIN_SendBreak(huart);
+
+    // Send the rest of the frame
+    HAL_UART_Transmit(huart, lin_frame, data_len + 3, HAL_MAX_DELAY);
+
+    // Display on SWV
+    printf("Sent LIN Frame - Sync: 0x%02X, PID: 0x%02X, Data: ", sync_field, pid);
+    for (uint8_t i = 0; i < data_len; i++) {
+        printf("0x%02X ", data[i]);
+    }
+    printf(", Checksum: 0x%02X\n", checksum);
+}

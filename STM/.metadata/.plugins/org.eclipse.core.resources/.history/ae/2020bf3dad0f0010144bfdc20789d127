@@ -1,0 +1,13 @@
+/*
+ * HardwareSerial_STM32.hpp
+ *
+ *  Created on: Apr 2, 2025
+ *      Author: Mediatek
+ */
+
+#ifndef SRC_HARDWARESERIAL_STM32_HPP_
+#define SRC_HARDWARESERIAL_STM32_HPP_
+
+
+
+#endif /* SRC_HARDWARESERIAL_STM32_HPP_ */

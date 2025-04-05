@@ -1,0 +1,10 @@
+12:39:50 **** Incremental Build of configuration Debug for project LinSend_fakeLib1 ****
+make -j4 all 
+arm-none-eabi-size   LinSend_fakeLib1.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19892	    112	   2040	  22044	   561c	LinSend_fakeLib1.elf
+Finished building: default.size.stdout
+ 
+
+12:39:50 Build Finished. 0 errors, 0 warnings. (took 397ms)
+

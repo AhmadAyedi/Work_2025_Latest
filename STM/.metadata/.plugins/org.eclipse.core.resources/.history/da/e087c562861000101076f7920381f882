@@ -1,0 +1,9 @@
+#include "my_utils.h"
+
+void my_utils_led_toggle(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) {
+    HAL_GPIO_TogglePin(GPIOx, GPIO_Pin);
+}
+
+void my_utils_delay(uint32_t ms) {
+    HAL_Delay(ms);
+}

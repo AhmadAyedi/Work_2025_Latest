@@ -1,0 +1,3 @@
+../Core/Src/linlib.c:13:9:Compute_Parity	24	static
+../Core/Src/linlib.c:23:9:Compute_Checksum	24	static
+../Core/Src/linlib.c:33:6:Send_LIN_Frame	56	static

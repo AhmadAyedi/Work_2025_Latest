@@ -1,0 +1,42 @@
+#ifndef STREAM_STM32_H
+#define STREAM_STM32_H
+
+#include "HardwareSerial_STM32.hpp"
+
+class Stream {
+public:
+    Stream(HardwareSerial& serial) : serial_(serial) {}
+
+    void print(const char* str) {
+        serial_.write((const uint8_t*)str, strlen(str));
+    }
+
+    void print(int val, int base = 10) {
+        char buf[16];
+        if (base == HEX) {
+            sprintf(buf, "0x%X", val);
+        } else {
+            sprintf(buf, "%d", val);
+        }
+        print(buf);
+    }
+
+    void println() {
+        print("\r\n");
+    }
+
+    void println(const char* str) {
+        print(str);
+        println();
+    }
+
+    void println(int val, int base = 10) {
+        print(val, base);
+        println();
+    }
+
+private:
+    HardwareSerial& serial_;
+};
+
+#endif
