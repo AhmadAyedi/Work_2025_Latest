@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include "LinFrameTransfer.hpp"
 
-#define LIN_TX_PIN 17 // UART2 TX (unused)
-#define LIN_RX_PIN 16 // UART2 RX
+#define LIN_TX_PIN 10 // UART2 TX (unused)
+#define LIN_RX_PIN 9  // UART2 RX
 
 HardwareSerial linSerial(2);
 LinFrameTransfer lin(linSerial, Serial, 0); // Verbose off

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;LinSendfakeLib2/Core/Inc/LinFrameTransfer.hpp&apos;" deleteContents="false" description="Delete resource &apos;LinSendfakeLib2/Core/Inc/LinFrameTransfer.hpp&apos;" element1="/LinSendfakeLib2/Core/Inc/LinFrameTransfer.hpp" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1744031864696"/>
+</session>

@@ -7656,3 +7656,36 @@ org.eclipse.core.internal.resources.ResourceException: Could not read metadata f
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
 !SUBENTRY 1 org.eclipse.core.resources 4 567 2025-04-05 21:36:01.197
 !MESSAGE Could not read metadata for 'C:\Ayedi\STM\.metadata\.plugins\org.eclipse.core.resources\.projects\Lin_receive2\.indexes\af\history.index'. Unexpected version: 0.
+!SESSION 2025-04-07 14:34:50.355 -----------------------------------------------
+eclipse.buildId=Version 1.13.0
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-04-07 14:35:39.945
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-04-07 14:35:39.961
+!MESSAGE Log4j2 initialized with config file C:\Ayedi\STM\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-04-07 14:36:16.197
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-04-07 15:11:27.212
+!MESSAGE Indexed 'LinSendLib_med3' (19 sources, 80 headers) in 9.9 sec: 4,834 declarations; 22,681 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0073%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-04-07 15:35:08.385
+!MESSAGE Indexed 'LinSendLib_med3' (25 sources, 175 headers) in 9.04 sec: 16,778 declarations; 48,124 references; 1 unresolved inclusions; 4 syntax errors; 13 unresolved names (0.02%)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-04-07 15:43:52.436
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 80000000; div: 40
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-04-07 16:02:56.789
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 80000000; div: 40
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-04-07 16:06:05.107
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 80000000; div: 40
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-04-07 16:30:08.154
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 80000000; div: 40

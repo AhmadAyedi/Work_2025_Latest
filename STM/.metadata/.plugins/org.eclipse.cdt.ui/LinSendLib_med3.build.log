@@ -1,0 +1,10 @@
+16:30:00 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
+make -j4 all 
+arm-none-eabi-size   LinSendLib_med3.elf 
+   text	   data	    bss	    dec	    hex	filename
+  27864	    112	   2048	  30024	   7548	LinSendLib_med3.elf
+Finished building: default.size.stdout
+ 
+
+16:30:00 Build Finished. 0 errors, 0 warnings. (took 513ms)
+
