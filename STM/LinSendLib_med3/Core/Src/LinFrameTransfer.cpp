@@ -5,13 +5,12 @@
  *      Author: Mediatek
  */
 
-
-// Core/Src/LinFrameTransfer.cpp
 #include "LinFrameTransfer.hpp"
 #include "stm32l4xx_hal.h"
 #include <optional>
 #include <vector>
 #include <numeric>
+#include <cstdio>  // Added for printf
 
 enum class debugLevel
 {
@@ -50,7 +49,7 @@ public:
         const uint8_t PID,
         uint8_t expectedDataLength,
         ChecksumFunction checksumFunc) :
-        state(State::WaitForBreak),  // Match declaration order
+        state(State::WaitForBreak),
         protectedID(PID),
         len(expectedDataLength),
         getChecksum(checksumFunc)
@@ -113,7 +112,7 @@ public:
             if (!getChecksum)
             {
                 reset();
-                break;  // Exit case safely
+                break;
             }
             uint8_t expectedChecksum = getChecksum(protectedID, rxData);
             if (newByte == expectedChecksum)
@@ -123,7 +122,7 @@ public:
             break;
         }
         case State::FrameComplete:
-            break;  // Explicitly handle FrameComplete
+            break;
         }
     }
 };
@@ -135,57 +134,135 @@ bool LinFrameTransfer::writeFrame(const uint8_t frameID, const std::vector<uint8
 
     const uint8_t protectedID{getProtectedID(frameID)};
 
-    writeFrameHead(protectedID);
-    HAL_UART_Transmit(huart, (uint8_t*)data.data(), data.size(), 100);
+    if (!writeFrameHead(protectedID))
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("writeFrame: Failed to send frame header\n");
+        return false;
+    }
+
+    if (HAL_UART_Transmit(huart, (uint8_t*)data.data(), data.size(), 100) != HAL_OK)
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("writeFrame: Failed to send data\n");
+        return false;
+    }
+
     uint8_t chksum = getChecksumLin2x(protectedID, data);
-    HAL_UART_Transmit(huart, &chksum, 1, 100);
+    if (HAL_UART_Transmit(huart, &chksum, 1, 100) != HAL_OK)
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("writeFrame: Failed to send checksum\n");
+        return false;
+    }
 
     if constexpr (writeReadback_verify)
     {
         auto result = receiveFrameExtractData(protectedID, data.size());
         if (!result || result.value() != data)
+        {
+            if (verboseLevel >= static_cast<int>(debugLevel::error))
+                printf("writeFrame: Readback verification failed\n");
             return false;
+        }
     }
+
+    if (verboseLevel >= static_cast<int>(debugLevel::verbose))
+        printf("writeFrame: Frame sent successfully\n");
     return true;
 }
 
 bool LinFrameTransfer::writeEmptyFrame(const uint8_t frameID)
 {
     const uint8_t protectedID{getProtectedID(frameID)};
-    writeFrameHead(protectedID);
+    if (!writeFrameHead(protectedID))
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("writeEmptyFrame: Failed to send frame header\n");
+        return false;
+    }
 
     if constexpr (writeReadback_verify)
     {
-        return receiveFrameHead(protectedID);
+        if (!receiveFrameHead(protectedID))
+        {
+            if (verboseLevel >= static_cast<int>(debugLevel::error))
+                printf("writeEmptyFrame: Readback header verification failed\n");
+            return false;
+        }
     }
+
     return true;
 }
 
 std::optional<std::vector<uint8_t>> LinFrameTransfer::readFrame(const uint8_t frameID, uint8_t expectedDataLength)
 {
     const uint8_t protectedID{getProtectedID(frameID)};
-    writeFrameHead(protectedID);
+    if (!writeFrameHead(protectedID))
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("readFrame: Failed to send frame header\n");
+        return std::nullopt;
+    }
     return receiveFrameExtractData(protectedID, expectedDataLength);
 }
 
-void LinFrameTransfer::writeFrameHead(uint8_t protectedID)
+bool LinFrameTransfer::writeFrameHead(uint8_t protectedID)
 {
-    writeBreak();
-    HAL_UART_Transmit(huart, &SYNC_FIELD, 1, 100);
-    HAL_UART_Transmit(huart, &protectedID, 1, 100);
+    if (writeBreak() == 0)
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("writeFrameHead: Failed to send break\n");
+        return false;
+    }
+
+    if (HAL_UART_Transmit(huart, &SYNC_FIELD, 1, 100) != HAL_OK)
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("writeFrameHead: Failed to send sync\n");
+        return false;
+    }
+
+    if (HAL_UART_Transmit(huart, &protectedID, 1, 100) != HAL_OK)
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("writeFrameHead: Failed to send PID\n");
+        return false;
+    }
+
+    return true;
 }
 
 size_t LinFrameTransfer::writeBreak()
 {
     uint32_t currentBaud = huart->Init.BaudRate;
-    huart->Init.BaudRate = baud / 2;
-    HAL_UART_Init(huart);
+    huart->Init.BaudRate = baud / 2;  // Half baud for break (e.g., 9600)
+    if (HAL_UART_Init(huart) != HAL_OK)
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("writeBreak: Failed to init UART at half baud\n");
+        huart->Init.BaudRate = currentBaud;
+        HAL_UART_Init(huart);  // Attempt to restore
+        return 0;
+    }
 
     uint8_t breakChar = BREAK_FIELD;
-    HAL_UART_Transmit(huart, &breakChar, 1, 100);
+    if (HAL_UART_Transmit(huart, &breakChar, 1, 100) != HAL_OK)
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("writeBreak: Failed to send break char\n");
+        huart->Init.BaudRate = currentBaud;
+        HAL_UART_Init(huart);
+        return 0;
+    }
 
-    huart->Init.BaudRate = currentBaud;  // Use the stored baud rate
-    HAL_UART_Init(huart);
+    huart->Init.BaudRate = currentBaud;
+    if (HAL_UART_Init(huart) != HAL_OK)
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("writeBreak: Failed to restore UART baud\n");
+        return 0;
+    }
 
     return 1;
 }
@@ -212,7 +289,11 @@ std::optional<std::vector<uint8_t>> LinFrameTransfer::receiveFrameExtractData(ui
     }
 
     if (!frameReader.isFinish())
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("receiveFrameExtractData: Timeout or invalid frame\n");
         return std::nullopt;
+    }
 
     return frameReader.getData();
 }
@@ -229,7 +310,13 @@ bool LinFrameTransfer::receiveFrameHead(uint8_t protectedID)
             frameReader.processByte(rxByte);
     }
 
-    return frameReader.hasHead();
+    if (!frameReader.hasHead())
+    {
+        if (verboseLevel >= static_cast<int>(debugLevel::error))
+            printf("receiveFrameHead: Timeout or invalid header\n");
+        return false;
+    }
+    return true;
 }
 
 uint8_t LinFrameTransfer::getChecksumLin2x(const uint8_t protectedID, const std::vector<uint8_t> &data)

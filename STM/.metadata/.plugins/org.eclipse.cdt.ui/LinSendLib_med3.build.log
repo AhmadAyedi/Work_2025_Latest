@@ -1,10 +1,20 @@
-16:30:00 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
+22:39:33 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
 make -j4 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++17 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp:223:13: warning: 'void MX_ITM_Init()' defined but not used [-Wunused-function]
+  223 | static void MX_ITM_Init(void)
+      |             ^~~~~~~~~~~
+arm-none-eabi-g++ -o "LinSendLib_med3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\LinSendLib_med3\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LinSendLib_med3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: LinSendLib_med3.elf
+ 
 arm-none-eabi-size   LinSendLib_med3.elf 
+arm-none-eabi-objdump -h -S  LinSendLib_med3.elf  > "LinSendLib_med3.list"
    text	   data	    bss	    dec	    hex	filename
-  27864	    112	   2048	  30024	   7548	LinSendLib_med3.elf
+  23936	    112	   2048	  26096	   65f0	LinSendLib_med3.elf
 Finished building: default.size.stdout
  
+Finished building: LinSendLib_med3.list
+ 
 
-16:30:00 Build Finished. 0 errors, 0 warnings. (took 513ms)
+22:39:35 Build Finished. 0 errors, 1 warnings. (took 1s.906ms)
 

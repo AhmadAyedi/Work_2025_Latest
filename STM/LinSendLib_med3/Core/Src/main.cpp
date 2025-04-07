@@ -108,7 +108,7 @@ int main(void)
 
     // Create LinFrameTransfer object
     LinFrameTransfer lin(&huart1);             // UART2 handle
-    std::vector<uint8_t> data = {0x01, 0x02, 0x03};  // Sample data to send
+    std::vector<uint8_t> data = {0x01, 0x02, 0x04};  // Sample data to send
   /* USER CODE END 2 */
 
   /* Infinite loop */

@@ -1,5 +1,5 @@
 ../Drivers/CMSIS/Include/core_cm4.h:2059:26:uint32_t ITM_SendChar(uint32_t)	16	static,ignoring_inline_asm
-../Core/Inc/LinFrameTransfer.hpp:38:5:LinFrameTransfer::LinFrameTransfer(UART_HandleTypeDef*, int)	24	static
+../Core/Inc/LinFrameTransfer.hpp:25:5:LinFrameTransfer::LinFrameTransfer(UART_HandleTypeDef*, int)	24	static
 ../Core/Src/main.cpp:57:9:int _write(int, char*, int)	32	static
 ../Core/Src/main.cpp:75:5:int main()	64	static
 ../Core/Src/main.cpp:143:6:void SystemClock_Config()	96	static
