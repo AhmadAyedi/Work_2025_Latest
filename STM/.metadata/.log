@@ -7815,3 +7815,24 @@ java.lang.NullPointerException: Cannot read the array length because "containers
 
 !ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-04-08 10:41:31.655
 !MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 80000000; div: 40
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-04-08 10:55:53.198
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 80000000; div: 40
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-04-08 10:57:46.975
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 80000000; div: 40
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-04-08 11:02:20.300
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 80000000; div: 40
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-04-08 11:04:55.751
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 80000000; div: 40
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-04-08 11:06:36.275
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 80000000; div: 40
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-04-08 11:08:27.302
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 80000000; div: 40
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-04-08 11:18:51.330
+!MESSAGE Indexed 'LinSend_lib_github' (19 sources, 80 headers) in 5.48 sec: 4,834 declarations; 22,681 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0073%)
