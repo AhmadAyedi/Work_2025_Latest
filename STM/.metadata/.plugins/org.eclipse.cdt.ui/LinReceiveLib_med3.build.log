@@ -1,17 +1,10 @@
-11:08:17 **** Incremental Build of configuration Debug for project LinReceiveLib_med3 ****
+11:45:57 **** Build of configuration Debug for project LinReceiveLib_med3 ****
 make -j4 all 
-arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++17 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-g++ -o "LinReceiveLib_med3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\LinReceiveLib_med3\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LinReceiveLib_med3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
-Finished building target: LinReceiveLib_med3.elf
- 
 arm-none-eabi-size   LinReceiveLib_med3.elf 
-arm-none-eabi-objdump -h -S  LinReceiveLib_med3.elf  > "LinReceiveLib_med3.list"
    text	   data	    bss	    dec	    hex	filename
   27124	    112	   2048	  29284	   7264	LinReceiveLib_med3.elf
 Finished building: default.size.stdout
  
-Finished building: LinReceiveLib_med3.list
- 
 
-11:08:19 Build Finished. 0 errors, 0 warnings. (took 1s.683ms)
+11:45:58 Build Finished. 0 errors, 0 warnings. (took 916ms)
 
