@@ -121,7 +121,6 @@ int main(void)
     /* USER CODE END WHILE */
 	  /* USER CODE END WHILE */
 	      // Receive a frame
-	  HAL_Delay(100);  // Small offset
 	      auto result = lin.readFrame(0x10, 3);  // Listen for ID 0x10, expect 3 bytes
 	      if (result.has_value())
 	      {
@@ -138,7 +137,7 @@ int main(void)
 	          printf("No frame received or invalid\n");
 	      }
 
-	      HAL_Delay(1000);  // Sync with ESP32's 1-second interval
+	      HAL_Delay(1200);  // Sync with ESP32's 1-second interval
 	      /* USER CODE BEGIN 3 */
 	    }
 	    /* USER CODE END 3 */

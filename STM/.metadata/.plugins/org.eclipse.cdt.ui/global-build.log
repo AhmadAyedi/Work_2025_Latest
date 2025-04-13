@@ -1,88 +1,137 @@
-22:05:18 **** Incremental Build of configuration Debug for project CanSend2 ****
+10:55:58 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
 make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'PrintCANFrame':
-../Core/Src/main.c:76:22: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
-   76 |     printf("ID: 0x%03X (%11b)\n", header->StdId, header->StdId);
-      |                   ~~~^            ~~~~~~~~~~~~~
-      |                      |                  |
-      |                      unsigned int       uint32_t {aka long unsigned int}
-      |                   %03lX
-../Core/Src/main.c:76:28: warning: unknown conversion type character 'b' in format [-Wformat=]
-   76 |     printf("ID: 0x%03X (%11b)\n", header->StdId, header->StdId);
-      |                            ^
-../Core/Src/main.c:76:12: warning: too many arguments for format [-Wformat-extra-args]
-   76 |     printf("ID: 0x%03X (%11b)\n", header->StdId, header->StdId);
-      |            ^~~~~~~~~~~~~~~~~~~~~
-../Core/Src/main.c:88:19: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
-   88 |     printf("DLC: %d (%04b)\n", header->DLC, header->DLC);
-      |                  ~^            ~~~~~~~~~~~
-      |                   |                  |
-      |                   int                uint32_t {aka long unsigned int}
-      |                  %ld
-../Core/Src/main.c:88:25: warning: unknown conversion type character 'b' in format [-Wformat=]
-   88 |     printf("DLC: %d (%04b)\n", header->DLC, header->DLC);
-      |                         ^
-../Core/Src/main.c:88:12: warning: too many arguments for format [-Wformat-extra-args]
-   88 |     printf("DLC: %d (%04b)\n", header->DLC, header->DLC);
-      |            ^~~~~~~~~~~~~~~~~~
-arm-none-eabi-gcc -o "CanSend2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\CanSend2\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CanSend2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CanSend2.elf
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++17 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp:246:13: warning: 'void MX_ITM_Init()' defined but not used [-Wunused-function]
+  246 | static void MX_ITM_Init(void)
+      |             ^~~~~~~~~~~
+arm-none-eabi-g++ -o "LinSendLib_med3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\LinSendLib_med3\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LinSendLib_med3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: LinSendLib_med3.elf
  
-arm-none-eabi-size   CanSend2.elf 
-arm-none-eabi-objdump -h -S  CanSend2.elf  > "CanSend2.list"
+arm-none-eabi-size   LinSendLib_med3.elf 
+arm-none-eabi-objdump -h -S  LinSendLib_med3.elf  > "LinSendLib_med3.list"
    text	   data	    bss	    dec	    hex	filename
-  12484	    112	   1984	  14580	   38f4	CanSend2.elf
+  24308	    112	   2048	  26468	   6764	LinSendLib_med3.elf
 Finished building: default.size.stdout
  
-Finished building: CanSend2.list
+Finished building: LinSendLib_med3.list
  
-22:05:23 **** Incremental Build of configuration Debug for project CanSend2 ****
-make -j4 all 
-arm-none-eabi-size   CanSend2.elf 
-   text	   data	    bss	    dec	    hex	filename
-  12484	    112	   1984	  14580	   38f4	CanSend2.elf
-Finished building: default.size.stdout
- 
-22:10:01 **** Incremental Build of configuration Debug for project CanSend2 ****
-make -j4 all 
-arm-none-eabi-size   CanSend2.elf 
-   text	   data	    bss	    dec	    hex	filename
-  12484	    112	   1984	  14580	   38f4	CanSend2.elf
-Finished building: default.size.stdout
- 
-11:32:52 **** Build of configuration Debug for project LinSendLib_med3 ****
+10:57:11 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
 make -j4 all 
 arm-none-eabi-size   LinSendLib_med3.elf 
    text	   data	    bss	    dec	    hex	filename
-  23936	    112	   2048	  26096	   65f0	LinSendLib_med3.elf
+  24308	    112	   2048	  26468	   6764	LinSendLib_med3.elf
 Finished building: default.size.stdout
  
-11:40:13 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
+10:58:27 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
+make -j4 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++17 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp:246:13: warning: 'void MX_ITM_Init()' defined but not used [-Wunused-function]
+  246 | static void MX_ITM_Init(void)
+      |             ^~~~~~~~~~~
+arm-none-eabi-g++ -o "LinSendLib_med3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\LinSendLib_med3\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LinSendLib_med3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: LinSendLib_med3.elf
+ 
+arm-none-eabi-size   LinSendLib_med3.elf 
+arm-none-eabi-objdump -h -S  LinSendLib_med3.elf  > "LinSendLib_med3.list"
+   text	   data	    bss	    dec	    hex	filename
+  24308	    112	   2048	  26468	   6764	LinSendLib_med3.elf
+Finished building: default.size.stdout
+ 
+Finished building: LinSendLib_med3.list
+ 
+10:59:35 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
+make -j4 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++17 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp:246:13: warning: 'void MX_ITM_Init()' defined but not used [-Wunused-function]
+  246 | static void MX_ITM_Init(void)
+      |             ^~~~~~~~~~~
+arm-none-eabi-g++ -o "LinSendLib_med3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\LinSendLib_med3\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LinSendLib_med3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: LinSendLib_med3.elf
+ 
+arm-none-eabi-size   LinSendLib_med3.elf 
+arm-none-eabi-objdump -h -S  LinSendLib_med3.elf  > "LinSendLib_med3.list"
+   text	   data	    bss	    dec	    hex	filename
+  24308	    112	   2048	  26468	   6764	LinSendLib_med3.elf
+Finished building: default.size.stdout
+ 
+Finished building: LinSendLib_med3.list
+ 
+11:00:29 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
+make -j4 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++17 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp:246:13: warning: 'void MX_ITM_Init()' defined but not used [-Wunused-function]
+  246 | static void MX_ITM_Init(void)
+      |             ^~~~~~~~~~~
+arm-none-eabi-g++ -o "LinSendLib_med3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\LinSendLib_med3\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LinSendLib_med3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: LinSendLib_med3.elf
+ 
+arm-none-eabi-size   LinSendLib_med3.elf 
+arm-none-eabi-objdump -h -S  LinSendLib_med3.elf  > "LinSendLib_med3.list"
+   text	   data	    bss	    dec	    hex	filename
+  24308	    112	   2048	  26468	   6764	LinSendLib_med3.elf
+Finished building: default.size.stdout
+ 
+Finished building: LinSendLib_med3.list
+ 
+11:00:49 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
 make -j4 all 
 arm-none-eabi-size   LinSendLib_med3.elf 
    text	   data	    bss	    dec	    hex	filename
-  23936	    112	   2048	  26096	   65f0	LinSendLib_med3.elf
+  24308	    112	   2048	  26468	   6764	LinSendLib_med3.elf
 Finished building: default.size.stdout
  
-11:43:30 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
+11:01:35 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
+make -j4 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++17 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp:246:13: warning: 'void MX_ITM_Init()' defined but not used [-Wunused-function]
+  246 | static void MX_ITM_Init(void)
+      |             ^~~~~~~~~~~
+arm-none-eabi-g++ -o "LinSendLib_med3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\LinSendLib_med3\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LinSendLib_med3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: LinSendLib_med3.elf
+ 
+arm-none-eabi-size   LinSendLib_med3.elf 
+arm-none-eabi-objdump -h -S  LinSendLib_med3.elf  > "LinSendLib_med3.list"
+   text	   data	    bss	    dec	    hex	filename
+  24308	    112	   2048	  26468	   6764	LinSendLib_med3.elf
+Finished building: default.size.stdout
+ 
+Finished building: LinSendLib_med3.list
+ 
+11:03:29 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
+make -j4 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++17 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp:246:13: warning: 'void MX_ITM_Init()' defined but not used [-Wunused-function]
+  246 | static void MX_ITM_Init(void)
+      |             ^~~~~~~~~~~
+arm-none-eabi-g++ -o "LinSendLib_med3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\LinSendLib_med3\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LinSendLib_med3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: LinSendLib_med3.elf
+ 
+arm-none-eabi-size   LinSendLib_med3.elf 
+arm-none-eabi-objdump -h -S  LinSendLib_med3.elf  > "LinSendLib_med3.list"
+   text	   data	    bss	    dec	    hex	filename
+  24308	    112	   2048	  26468	   6764	LinSendLib_med3.elf
+Finished building: default.size.stdout
+ 
+Finished building: LinSendLib_med3.list
+ 
+11:05:22 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
 make -j4 all 
 arm-none-eabi-size   LinSendLib_med3.elf 
    text	   data	    bss	    dec	    hex	filename
-  23936	    112	   2048	  26096	   65f0	LinSendLib_med3.elf
+  24308	    112	   2048	  26468	   6764	LinSendLib_med3.elf
 Finished building: default.size.stdout
  
-11:45:57 **** Build of configuration Debug for project LinReceiveLib_med3 ****
-make -j4 all 
-arm-none-eabi-size   LinReceiveLib_med3.elf 
-   text	   data	    bss	    dec	    hex	filename
-  27124	    112	   2048	  29284	   7264	LinReceiveLib_med3.elf
-Finished building: default.size.stdout
- 
-12:04:58 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
+11:12:07 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
 make -j4 all 
 arm-none-eabi-size   LinSendLib_med3.elf 
    text	   data	    bss	    dec	    hex	filename
-  23936	    112	   2048	  26096	   65f0	LinSendLib_med3.elf
+  24308	    112	   2048	  26468	   6764	LinSendLib_med3.elf
+Finished building: default.size.stdout
+ 
+11:17:14 **** Incremental Build of configuration Debug for project LinSendLib_med3 ****
+make -j4 all 
+arm-none-eabi-size   LinSendLib_med3.elf 
+   text	   data	    bss	    dec	    hex	filename
+  24308	    112	   2048	  26468	   6764	LinSendLib_med3.elf
 Finished building: default.size.stdout
  

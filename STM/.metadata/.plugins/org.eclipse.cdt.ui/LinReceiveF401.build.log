@@ -1,0 +1,17 @@
+10:25:26 **** Incremental Build of configuration Debug for project LinReceiveF401 ****
+make -j4 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++17 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "LinReceiveF401.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ayedi\STM\LinReceiveF401\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LinReceiveF401.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: LinReceiveF401.elf
+ 
+arm-none-eabi-size   LinReceiveF401.elf 
+arm-none-eabi-objdump -h -S  LinReceiveF401.elf  > "LinReceiveF401.list"
+   text	   data	    bss	    dec	    hex	filename
+  22948	    112	   1976	  25036	   61cc	LinReceiveF401.elf
+Finished building: default.size.stdout
+ 
+Finished building: LinReceiveF401.list
+ 
+
+10:25:28 Build Finished. 0 errors, 0 warnings. (took 1s.639ms)
+
