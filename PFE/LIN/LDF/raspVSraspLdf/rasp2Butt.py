@@ -12,6 +12,7 @@ def parse_ldf(ldf_file):
     signals = {}
     frames = {}
 
+
     current_section = None
 
     for line in lines:
