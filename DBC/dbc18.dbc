@@ -1,0 +1,253 @@
+VERSION ""
+
+NS_ :
+    NS_DESC_
+    CM_
+    BA_DEF_
+    BA_
+    VAL_
+    CAT_DEF_
+    CAT_
+    FILTER
+    BA_DEF_DEF_
+    EV_DATA_
+    ENVVAR_DATA_
+    SGTYPE_
+    SGTYPE_VAL_
+    BA_DEF_SGTYPE_
+    BA_SGTYPE_
+    SIG_TYPE_REF_
+    VAL_TABLE_
+    SIG_GROUP_
+    SIG_VALTYPE_
+    SIGTYPE_VALTYPE_
+    BO_TX_BU_
+    BA_DEF_REL_
+    BA_REL_
+    BA_DEF_DEF_REL_
+    BU_SG_REL_
+    BU_EV_REL_
+    BU_BO_REL_
+    SG_MUL_VAL_
+
+BS_:
+
+BU_: ECU1 ECU2 BCM ICM DDM PDM RCM TCM
+
+BO_ 100 LIGHTING_CONTROL: 8 ECU1
+    SG_ HeadlightStatus : 0|2@1+ (1,0) [0|3] "" ECU2
+        VAL_ 100 HeadlightStatus 0 "Off" 1 "LowBeam" 2 "HighBeam" 3 "Auto";
+    SG_ FogLightFront : 2|1@1+ (1,0) [0|1] "" ECU2
+    SG_ FogLightRear : 3|1@1+ (1,0) [0|1] "" ECU2
+    SG_ TurnSignalLeft : 4|1@1+ (1,0) [0|1] "" ECU2
+    SG_ TurnSignalRight : 5|1@1+ (1,0) [0|1] "" ECU2
+    SG_ HazardLights : 6|1@1+ (1,0) [0|1] "" ECU2
+    SG_ ParkingLights : 7|1@1+ (1,0) [0|1] "" ECU2
+    SG_ BrakeLight : 8|1@1+ (1,0) [0|1] "" ECU2
+    SG_ ReverseLight : 9|1@1+ (1,0) [0|1] "" ECU2
+    SG_ InteriorLight : 10|2@1+ (1,0) [0|3] "" ECU2
+        VAL_ 100 InteriorLight 0 "Off" 1 "Dim" 2 "Medium" 3 "Full";
+    SG_ DaytimeRunningLight : 12|1@1+ (1,0) [0|1] "" ECU2
+
+BO_ 101 WIPER_CONTROL: 5 ECU1
+    SG_ FrontWiperStatus : 0|2@1+ (1,0) [0|3] "" ECU2
+        VAL_ 101 FrontWiperStatus 0 "Off" 1 "Low" 2 "Medium" 3 "High";
+    SG_ FrontWiperIntermittent : 2|3@1+ (1,0) [0|7] "" ECU2
+    SG_ RearWiperStatus : 5|1@1+ (1,0) [0|1] "" ECU2
+    SG_ WasherFluidFront : 6|1@1+ (1,0) [0|1] "" ECU2
+    SG_ WasherFluidRear : 7|1@1+ (1,0) [0|1] "" ECU2
+    SG_ AutoWiperSensitivity : 8|3@1+ (1,0) [0|7] "" ECU2
+
+BO_ 102 DOOR_CONTROL: 6 ECU1
+    SG_ DoorLockStatus : 0|1@1+ (1,0) [0|1] "" ECU2
+    SG_ DriverDoor : 1|1@1+ (1,0) [0|1] "" ECU2
+    SG_ PassengerDoor : 2|1@1+ (1,0) [0|1] "" ECU2
+    SG_ RearLeftDoor : 3|1@1+ (1,0) [0|1] "" ECU2
+    SG_ RearRightDoor : 4|1@1+ (1,0) [0|1] "" ECU2
+    SG_ TrunkStatus : 5|1@1+ (1,0) [0|1] "" ECU2
+    SG_ HoodStatus : 6|1@1+ (1,0) [0|1] "" ECU2
+
+BO_ 103 WINDOW_CONTROL: 8 ECU1
+    SG_ DriverWindow : 0|8@1+ (0.4,0) [0|100] "%" ECU2
+    SG_ PassengerWindow : 8|8@1+ (0.4,0) [0|100] "%" ECU2
+    SG_ RearLeftWindow : 16|8@1+ (0.4,0) [0|100] "%" ECU2
+    SG_ RearRightWindow : 24|8@1+ (0.4,0) [0|100] "%" ECU2
+    SG_ SunroofPosition : 32|8@1+ (0.4,0) [0|100] "%" ECU2
+
+BO_ 104 SEAT_CONTROL: 8 ECU1
+    SG_ DriverSeatPosition : 0|8@1+ (0.5,0) [0|100] "%" ECU2
+    SG_ PassengerSeatPosition : 8|8@1+ (0.5,0) [0|100] "%" ECU2
+    SG_ DriverSeatHeating : 16|3@1+ (1,0) [0|7] "" ECU2
+    SG_ PassengerSeatHeating : 19|3@1+ (1,0) [0|7] "" ECU2
+    SG_ DriverSeatCooling : 22|3@1+ (1,0) [0|7] "" ECU2
+    SG_ PassengerSeatCooling : 25|3@1+ (1,0) [0|7] "" ECU2
+    SG_ DriverLumbarSupport : 28|4@1+ (1,0) [0|15] "" ECU2
+    SG_ PassengerLumbarSupport : 32|4@1+ (1,0) [0|15] "" ECU2
+
+BO_ 105 MIRROR_CONTROL: 6 ECU1
+    SG_ LeftMirrorPosition : 0|8@1+ (0.5,-90) [-90|90] "deg" ECU2
+    SG_ RightMirrorPosition : 8|8@1+ (0.5,-90) [-90|90] "deg" ECU2
+    SG_ MirrorFoldStatus : 16|1@1+ (1,0) [0|1] "" ECU2
+    SG_ MirrorHeating : 17|1@1+ (1,0) [0|1] "" ECU2
+    SG_ AutoDimming : 18|1@1+ (1,0) [0|1] "" ECU2
+
+BO_ 106 CLIMATE_CONTROL: 8 ECU1
+    SG_ ACStatus : 0|1@1+ (1,0) [0|1] "" ECU2
+    SG_ FanSpeed : 1|4@1+ (1,0) [0|15] "" ECU2
+    SG_ TemperatureSetting : 5|8@1+ (0.5,16) [16|32] "degC" ECU2
+    SG_ AirflowDirection : 13|3@1+ (1,0) [0|7] "" ECU2
+    SG_ RecirculationMode : 16|1@1+ (1,0) [0|1] "" ECU2
+    SG_ RearDefrost : 17|1@1+ (1,0) [0|1] "" ECU2
+    SG_ SeatVentilation : 18|2@1+ (1,0) [0|3] "" ECU2
+    SG_ DualZoneMode : 20|1@1+ (1,0) [0|1] "" ECU2
+
+BO_ 107 STEERING_WHEEL_CONTROL: 4 ECU1
+    SG_ SteeringWheelHeating : 0|3@1+ (1,0) [0|7] "" ECU2
+    SG_ CruiseControlStatus : 3|2@1+ (1,0) [0|3] "" ECU2
+    SG_ LaneKeepAssist : 5|1@1+ (1,0) [0|1] "" ECU2
+    SG_ AdaptiveCruiseControl : 6|1@1+ (1,0) [0|1] "" ECU2
+    SG_ SteeringWheelPosition : 7|8@1+ (0.5,-90) [-90|90] "deg" ECU2
+
+BO_ 108 VEHICLE_STATUS: 8 ECU1
+    SG_ VehicleSpeed : 0|16@1+ (0.01,0) [0|300] "km/h" ECU2
+    SG_ EngineRPM : 16|16@1+ (10,0) [0|8000] "rpm" ECU2
+    SG_ FuelLevel : 32|8@1+ (0.5,0) [0|100] "%" ECU2
+    SG_ Odometer : 40|32@1+ (1,0) [0|999999] "km" ECU2
+    SG_ TripMeter : 72|24@1+ (0.1,0) [0|9999.9] "km" ECU2
+
+BO_ 109 SAFETY_SYSTEMS: 4 ECU1
+    SG_ AirbagStatus : 0|2@1+ (1,0) [0|3] "" ECU2
+    SG_ ABSStatus : 2|1@1+ (1,0) [0|1] "" ECU2
+    SG_ TractionControl : 3|1@1+ (1,0) [0|1] "" ECU2
+    SG_ StabilityControl : 4|1@1+ (1,0) [0|1] "" ECU2
+    SG_ TirePressureWarning : 5|1@1+ (1,0) [0|1] "" ECU2
+    SG_ BrakePadWearWarning : 6|1@1+ (1,0) [0|1] "" ECU2
+    SG_ ParkingSensorStatus : 7|4@1+ (1,0) [0|15] "" ECU2
+
+BO_ 110 INFOTAINMENT_CONTROL: 8 ECU1
+    SG_ VolumeLevel : 0|7@1+ (1,0) [0|100] "%" ECU2
+    SG_ SourceSelection : 7|3@1+ (1,0) [0|7] "" ECU2
+    SG_ NavigationActive : 10|1@1+ (1,0) [0|1] "" ECU2
+    SG_ BluetoothConnected : 11|1@1+ (1,0) [0|1] "" ECU2
+    SG_ VoiceCommandActive : 12|1@1+ (1,0) [0|1] "" ECU2
+    SG_ DisplayBrightness : 13|5@1+ (1,0) [0|31] "" ECU2
+    SG_ ThemeSelection : 18|2@1+ (1,0) [0|3] "" ECU2
+
+BO_ 111 BATTERY_MANAGEMENT: 6 ECU1
+    SG_ BatteryVoltage : 0|16@1+ (0.01,0) [0|20] "V" ECU2
+    SG_ BatteryCurrent : 16|16@1+ (0.1,-100) [-100|100] "A" ECU2
+    SG_ BatteryTemperature : 32|8@1+ (0.5,-40) [-40|100] "degC" ECU2
+    SG_ StateOfCharge : 40|8@1+ (0.5,0) [0|100] "%" ECU2
+    SG_ StateOfHealth : 48|8@1+ (0.5,0) [0|100] "%" ECU2
+    SG_ ChargingStatus : 56|2@1+ (1,0) [0|3] "" ECU2
+
+BO_ 112 DRIVING_MODE: 2 ECU1
+    SG_ DrivingMode : 0|3@1+ (1,0) [0|7] "" ECU2
+        VAL_ 112 DrivingMode 0 "Normal" 1 "Eco" 2 "Sport" 3 "Snow" 4 "Offroad" 5 "Custom1" 6 "Custom2" 7 "Race";
+    SG_ RegenerativeBraking : 3|3@1+ (1,0) [0|7] "" ECU2
+    SG_ HillDescentControl : 6|1@1+ (1,0) [0|1] "" ECU2
+    SG_ TerrainResponse : 7|2@1+ (1,0) [0|3] "" ECU2
+
+BO_ 113 EXTERNAL_LIGHTS_STATUS: 8 ECU2
+    SG_ HeadlightFeedback : 0|2@1+ (1,0) [0|3] "" ECU1
+    SG_ TurnSignalFeedback : 2|2@1+ (1,0) [0|3] "" ECU1
+    SG_ BrakeLightFeedback : 4|1@1+ (1,0) [0|1] "" ECU1
+    SG_ FogLightFeedback : 5|1@1+ (1,0) [0|1] "" ECU1
+    SG_ DRLFeedback : 6|1@1+ (1,0) [0|1] "" ECU1
+
+BO_ 114 WIPER_FEEDBACK: 3 ECU2
+    SG_ FrontWiperFeedback : 0|2@1+ (1,0) [0|3] "" ECU1
+    SG_ RearWiperFeedback : 2|1@1+ (1,0) [0|1] "" ECU1
+    SG_ WasherFluidLevel : 3|3@1+ (1,0) [0|7] "" ECU1
+
+BO_ 115 DOOR_FEEDBACK: 6 ECU2
+    SG_ DoorLockFeedback : 0|1@1+ (1,0) [0|1] "" ECU1
+    SG_ DoorStatusFeedback : 1|5@1+ (1,0) [0|31] "" ECU1
+    SG_ TrunkStatusFeedback : 6|1@1+ (1,0) [0|1] "" ECU1
+
+BO_ 116 WINDOW_FEEDBACK: 8 ECU2
+    SG_ WindowPositions : 0|32@1+ (1,0) [0|4294967295] "" ECU1
+    SG_ WindowMotorCurrent : 32|16@1+ (0.1,0) [0|100] "A" ECU1
+    SG_ WindowSafetyStop : 48|1@1+ (1,0) [0|1] "" ECU1
+
+BO_ 117 SEAT_FEEDBACK: 6 ECU2
+    SG_ SeatPositionFeedback : 0|16@1+ (1,0) [0|65535] "" ECU1
+    SG_ SeatHeatingFeedback : 16|6@1+ (1,0) [0|63] "" ECU1
+    SG_ SeatMotorCurrent : 22|8@1+ (0.1,0) [0|25.5] "A" ECU1
+
+BO_ 118 MIRROR_FEEDBACK: 4 ECU2
+    SG_ MirrorPositionFeedback : 0|16@1+ (1,0) [0|65535] "" ECU1
+    SG_ MirrorFoldFeedback : 16|1@1+ (1,0) [0|1] "" ECU1
+    SG_ MirrorHeatingFeedback : 17|1@1+ (1,0) [0|1] "" ECU1
+
+BO_ 119 CLIMATE_FEEDBACK: 6 ECU2
+    SG_ CabinTemperature : 0|8@1+ (0.5,-40) [-40|87.5] "degC" ECU1
+    SG_ ACCompressorStatus : 8|1@1+ (1,0) [0|1] "" ECU1
+    SG_ BlowerMotorCurrent : 9|8@1+ (0.1,0) [0|25.5] "A" ECU1
+    SG_ EvaporatorTemp : 17|8@1+ (0.5,-40) [-40|87.5] "degC" ECU1
+
+BO_ 120 VEHICLE_FEEDBACK: 8 ECU2
+    SG_ CurrentFuelConsumption : 0|16@1+ (0.01,0) [0|655.35] "L/100km" ECU1
+    SG_ AverageFuelConsumption : 16|16@1+ (0.01,0) [0|655.35] "L/100km" ECU1
+    SG_ RangeEstimate : 32|16@1+ (1,0) [0|65535] "km" ECU1
+    SG_ EngineTemp : 48|8@1+ (0.5,-40) [-40|87.5] "degC" ECU1
+    SG_ TransmissionTemp : 56|8@1+ (0.5,-40) [-40|87.5] "degC" ECU1
+
+BA_DEF_ "BusType" STRING;
+BA_DEF_ "ProtocolType" STRING;
+BA_DEF_ "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ "GenSigStartValue" INT 0 4294967295;
+
+BA_DEF_DEF_ "BusType" "CAN";
+BA_DEF_DEF_ "ProtocolType" "";
+BA_DEF_DEF_ "GenMsgCycleTime" 100;
+BA_DEF_DEF_ "GenSigStartValue" 0;
+
+BA_ "ProtocolType" "CAN";
+BA_ "BusType" "CAN";
+BA_ "GenMsgCycleTime" BO_ 100 1000;
+BA_ "GenMsgCycleTime" BO_ 101 500;
+BA_ "GenMsgCycleTime" BO_ 102 200;
+BA_ "GenMsgCycleTime" BO_ 103 200;
+BA_ "GenMsgCycleTime" BO_ 104 500;
+BA_ "GenMsgCycleTime" BO_ 105 1000;
+BA_ "GenMsgCycleTime" BO_ 106 500;
+BA_ "GenMsgCycleTime" BO_ 107 200;
+BA_ "GenMsgCycleTime" BO_ 108 100;
+BA_ "GenMsgCycleTime" BO_ 109 500;
+BA_ "GenMsgCycleTime" BO_ 110 200;
+BA_ "GenMsgCycleTime" BO_ 111 1000;
+BA_ "GenMsgCycleTime" BO_ 112 500;
+BA_ "GenMsgCycleTime" BO_ 113 500;
+BA_ "GenMsgCycleTime" BO_ 114 500;
+BA_ "GenMsgCycleTime" BO_ 115 200;
+BA_ "GenMsgCycleTime" BO_ 116 200;
+BA_ "GenMsgCycleTime" BO_ 117 500;
+BA_ "GenMsgCycleTime" BO_ 118 1000;
+BA_ "GenMsgCycleTime" BO_ 119 500;
+BA_ "GenMsgCycleTime" BO_ 120 100;
+
+CM_ "Vehicle Control System DBC file";
+CM_ BU_ ECU1 "Primary Control Unit";
+CM_ BU_ ECU2 "Secondary Control Unit";
+CM_ BO_ 100 "Lighting control commands";
+CM_ BO_ 101 "Wiper control commands";
+CM_ BO_ 102 "Door control commands";
+CM_ BO_ 103 "Window control commands";
+CM_ BO_ 104 "Seat control commands";
+CM_ BO_ 105 "Mirror control commands";
+CM_ BO_ 106 "Climate control commands";
+CM_ BO_ 107 "Steering wheel controls";
+CM_ BO_ 108 "Vehicle status information";
+CM_ BO_ 109 "Safety systems status";
+CM_ BO_ 110 "Infotainment controls";
+CM_ BO_ 111 "Battery management system";
+CM_ BO_ 112 "Driving mode selection";
+CM_ BO_ 113 "External lights feedback";
+CM_ BO_ 114 "Wiper system feedback";
+CM_ BO_ 115 "Door system feedback";
+CM_ BO_ 116 "Window system feedback";
+CM_ BO_ 117 "Seat system feedback";
+CM_ BO_ 118 "Mirror system feedback";
+CM_ BO_ 119 "Climate system feedback";
+CM_ BO_ 120 "Vehicle system feedback";

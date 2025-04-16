@@ -1,0 +1,9 @@
+VERSION ""
+
+BO_ 100 TemperatureMessage: 8 RaspberryPi1
+ SG_ temperature : 0|8@1+ (1,0) [0|255] "C"  RaspberryPi2
+
+CM_ BO_ 100 "Temperature data sent from RaspberryPi1 to RaspberryPi2";
+
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 65535;
+BA_ "GenMsgCycleTime" BO_ 100 1000;
